@@ -1,7 +1,7 @@
-# Flask CI/CD Pipeline with Jenkins + Codeberg
+# Flask CI/CD Pipeline with Jenkins + erg
 
 ## 🧾 Description
-This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg webhooks to automatically deploy a simple Flask "Hello World" app to a server.
+This project sets up a basic CI/CD pipeline using Jenkins, triggered by github webhooks to automatically deploy a simple Flask "Hello World" app to a server.
 
 ---
 
@@ -9,7 +9,7 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 
 - Python 3 + Flask
 - Jenkins
-- Codeberg (Git Repo)
+- githun(Git Repo)
 - Webhooks
 - (Optional: Docker)
 
@@ -26,7 +26,7 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 
 ### 2. Flask App Setup
 
-- Clone repo: `git clone https://codeberg.org/<username>/<repo>.git`
+- Clone repo: `git clone https://github.com/<username>/<repo>.git`
 - `cd repo`
 - Install dependencies: `pip install -r requirements.txt`
 - Run: `python app.py`
@@ -56,8 +56,8 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 
 ## 🔍 How It Works
 
-1. Developer pushes to Codeberg
-2. Codeberg triggers a webhook
+1. Developer pushes to github
+2. github triggers a webhook
 3. Jenkins receives webhook → pulls latest code
 4. Jenkins installs dependencies and restarts the Flask app
 
