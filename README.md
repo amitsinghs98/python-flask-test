@@ -46,7 +46,7 @@ Install Jenkins and required dependencies (Java 17 or lower is recommended, not 
 sudo apt update
 sudo apt install openjdk-17-jdk
 
-2. Install Python and pip
+## 2. Install Python and pip
 sudo apt install python3 python3-pip python3-venv
 
 3. Create a Jenkins Pipeline Job
