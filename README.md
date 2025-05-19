@@ -45,11 +45,15 @@ Install Jenkins and required dependencies (Java 17 or lower is recommended, not 
 ```bash
 sudo apt update
 sudo apt install openjdk-17-jdk
+```
+---
 
 ## 2. Install Python and pip
 sudo apt install python3 python3-pip python3-venv
 
-3. Create a Jenkins Pipeline Job
+---
+
+## 3. Create a Jenkins Pipeline Job
 Jenkinsfile Example
 
 pipeline {
@@ -87,7 +91,9 @@ pipeline {
     }
 }
 
-Configure GitHub Webhook
+---
+
+## Configure GitHub Webhook
 Go to your GitHub repo → Settings → Webhooks
 
 Add a new webhook:
@@ -100,9 +106,13 @@ Trigger: Just the push event
 
 In Jenkins, under your job → Configure:
 
-Check "GitHub hook trigger for GITScm polling"
+---
 
-🐍 Sample Output
+## Check "GitHub hook trigger for GITScm polling"
+
+---
+
+## 🐍 Sample Output
 Visit: http://<your-server-ip>:5000
 
 Response:
