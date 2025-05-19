@@ -55,6 +55,7 @@ sudo apt install python3 python3-pip python3-venv
 
 ## 3. Create a Jenkins Pipeline Job
 Jenkinsfile Example
+![image](https://github.com/user-attachments/assets/7c6d58cf-f514-492b-a898-09a54ea27a46)
 
 pipeline {
     agent any
