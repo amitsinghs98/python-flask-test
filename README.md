@@ -51,9 +51,6 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 ---
 
 ## 📸 Screenshots 
-- Jenkins Dashboard
-- Webhook config in Codeberg
-- Terminal output of deployment
 
 ---
 
