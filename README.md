@@ -1,71 +1,112 @@
-# Flask CI/CD Pipeline with Jenkins + erg
+# Python Flask Hello World CI/CD with Jenkins
 
-## 🧾 Description
-This project sets up a basic CI/CD pipeline using Jenkins, triggered by github webhooks to automatically deploy a simple Flask "Hello World" app to a server.
+This project demonstrates how to deploy a simple Python Flask "Hello World" application to a cloud VM using Jenkins and GitHub. Jenkins is used for automating the deployment pipeline.
 
 ---
 
-## 🚀 Tech Stack
+## 🧰 Tech Stack
 
-- Python 3 + Flask
+- Python 3.x
+- Flask
 - Jenkins
-- githun(Git Repo)
-- Webhooks
-- (Optional: Docker)
+- GitHub
+- Ubuntu (Cloud VM or Local)
 
 ---
 
-## 🔧 Setup Instructions
+## 📂 Project Structure
 
-### 1. Jenkins Setup
+python-flask-test/
+├── app.py
+├── requirements.txt
+└── ...
 
-- Install Jenkins: `sudo apt install jenkins`
-- Start Jenkins: `sudo systemctl start jenkins`
-- Unlock Jenkins via browser
-- Install recommended plugins + Git, Pipeline
-
-### 2. Flask App Setup
-
-- Clone repo: `git clone https://github.com/<username>/<repo>.git`
-- `cd repo`
-- Install dependencies: `pip install -r requirements.txt`
-- Run: `python app.py`
-
-### 3. Webhook Setup 
-
-- Go to Repo → Settings → Webhooks
-- Add new webhook:
-  - URL: `http://<jenkins-ip>:8080/generic-webhook-trigger/invoke?token=flask-deploy`
-  - Trigger: On push
-
-### 4. Jenkins Job
-
-- New Pipeline Job
-- Set Git repo as source
-- Add token in webhook trigger config
-- Add the pipeline stages to:
-  - Clone code
-  - Install dependencies
-  - Restart app
 
 ---
 
-## 📸 Screenshots 
+## 🚀 Jenkins CI/CD Pipeline Workflow
+
+This pipeline performs the following:
+
+1. **Clone the GitHub Repo**
+2. **Create & Activate Python Virtual Environment**
+3. **Install Dependencies**
+4. **Start the Flask App**
+5. **Restart the App on New Push**
 
 ---
 
-## 🔍 How It Works
+## 🔧 Jenkins Setup
 
-1. Developer pushes to github
-2. github triggers a webhook
-3. Jenkins receives webhook → pulls latest code
-4. Jenkins installs dependencies and restarts the Flask app
+### 1. Install Jenkins
 
----
+Install Jenkins and required dependencies (Java 17 or lower is recommended, not Java 21).
 
-## 📌 Assumptions & Limitations
+```bash
+sudo apt update
+sudo apt install openjdk-17-jdk
 
-- Server is assumed to have Python3 and pip installed.
-- App restart is done via `nohup`; not production-ready.
-- No reverse proxy (e.g., Nginx) or SSL included.
-- Jenkins is publicly accessible to receive webhooks.
+2. Install Python and pip
+sudo apt install python3 python3-pip python3-venv
+
+3. Create a Jenkins Pipeline Job
+Jenkinsfile Example
+
+pipeline {
+    agent any
+
+    environment {
+        VENV_PATH = "${WORKSPACE}/venv"
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git credentialsId: 'your-git-creds-id', url: 'https://github.com/amitsinghs98/python-flask-test'
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                sh '''
+                    python3 -m venv ${VENV_PATH}
+                    ${VENV_PATH}/bin/pip install --upgrade pip
+                    ${VENV_PATH}/bin/pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Restart App') {
+            steps {
+                sh '''
+                    pkill -f app.py || true
+                    nohup ${VENV_PATH}/bin/python app.py &
+                '''
+            }
+        }
+    }
+}
+
+Configure GitHub Webhook
+Go to your GitHub repo → Settings → Webhooks
+
+Add a new webhook:
+
+Payload URL: http://<your-server-ip>:8080/github-webhook/
+
+Content type: application/json
+
+Trigger: Just the push event
+
+In Jenkins, under your job → Configure:
+
+Check "GitHub hook trigger for GITScm polling"
+
+🐍 Sample Output
+Visit: http://<your-server-ip>:5000
+
+Response:
+Hello, World!
+
+
+
