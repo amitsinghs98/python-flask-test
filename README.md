@@ -31,7 +31,7 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 - Install dependencies: `pip install -r requirements.txt`
 - Run: `python app.py`
 
-### 3. Webhook Setup (Codeberg)
+### 3. Webhook Setup 
 
 - Go to Repo → Settings → Webhooks
 - Add new webhook:
@@ -50,7 +50,7 @@ This project sets up a basic CI/CD pipeline using Jenkins, triggered by Codeberg
 
 ---
 
-## 📸 Screenshots (optional)
+## 📸 Screenshots 
 - Jenkins Dashboard
 - Webhook config in Codeberg
 - Terminal output of deployment
